@@ -3,8 +3,8 @@ from src.rover import Rover
 
 
 def main():
-    lines = [line.strip() for line in sys.stdin if line.strip()]
-
+    with open("input.txt") as f:
+        lines = [line.strip() for line in f if line.strip()]
     plateau_x, plateau_y = map(int, lines[0].split())
 
     i = 1
@@ -16,7 +16,7 @@ def main():
 
         commands = lines[i + 1]
 
-        rover = Rover(x, y, direction)
+        rover = Rover(x, y, direction, plateau_x, plateau_y)
         rover.execute(commands)
 
         results.append(rover.get_position())
