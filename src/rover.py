@@ -12,10 +12,12 @@ class Rover:
         'W': (-1, 0)
     }
 
-    def __init__(self, x, y, direction):
+    def __init__(self, x, y, direction, plateau_x, plateau_y):
         self.x = x
         self.y = y
         self.direction = direction
+        self.plateau_x = plateau_x
+        self.plateau_y = plateau_y
 
     def turn_left(self):
 
@@ -37,17 +39,16 @@ class Rover:
             self.y = new_y
 
     def execute(self, commands):
-        if cmd not in ['L','R','M']:
-            raise ValueError("Invalid command")
-        
-        else:
-            for cmd in commands:
-                if cmd == 'L':
-                    self.turn_left()
-                elif cmd == 'R':
-                    self.turn_right()
-                elif cmd == 'M':
-                    self.move()
+        for cmd in commands:
+            if cmd not in ['L', 'R', 'M']:
+                raise ValueError("Invalid command")
+
+            if cmd == 'L':
+                self.turn_left()
+            elif cmd == 'R':
+                self.turn_right()
+            elif cmd == 'M':
+                self.move()
 
     def get_position(self):
         return f"{self.x} {self.y} {self.direction}"
